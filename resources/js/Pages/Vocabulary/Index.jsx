@@ -12,7 +12,7 @@ const Index = (props) => {
                 </h2>
             }>
             
-            <div className="p-12">
+            <div className="p-12 bg-primary">
                 <h1>Blog Name</h1>
                 {vocabularies.map((vocabulary)=> (
                     <div id={vocabulary.id}>
