@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('vocabularies', function (Blueprint $table) {
             $table->id();
+            $table->string('english', 100);
+            $table->string('japanese', 200);
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('english', 50);
-            $table->string('japanese', 400);
             $table->softDeletes();
         });
     }

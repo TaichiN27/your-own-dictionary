@@ -16,6 +16,7 @@ const Index = (props) => {
                 <h1>Blog Name</h1>
                 {vocabularies.map((vocabulary)=> (
                     <div id={vocabulary.id}>
+                        <h2>{ vocabulary.id }</h2>
                         <h2>{ vocabulary.english }</h2>
                         <p>{ vocabulary.japanese }</p>
                     </div>
