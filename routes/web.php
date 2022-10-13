@@ -17,8 +17,11 @@ use App\Http\Controllers\VocabularyController;
 */
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get("/", [VocabularyController::class, "index"]);
+    Route::post("/vocabularies", [VocabularyController::class, "store"]);
+    Route::get("/", [VocabularyController::class, "index"])->name('index');
+    Route::get("/vocabularies/{vocabulary}", [VocabularyController::class, "show"]);
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
