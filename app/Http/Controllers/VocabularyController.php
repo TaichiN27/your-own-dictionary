@@ -14,10 +14,11 @@ class VocabularyController extends Controller
 {
         public function index(Vocabulary $vocabulary)
         {
-            return Inertia::render("Vocabulary/Index",["vocabularies" => $vocabulary->get()]);
+            return Inertia::render("Vocabulary/Index",["vocabularies" => $vocabulary->getPaginateByLimit()]);
 
         }
         
+
         public function store(VocabularyRequest $request, Vocabulary $vocabulary)
         {
             $input = $request->all();

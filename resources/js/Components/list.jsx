@@ -31,7 +31,7 @@ export const List = ({ vocabularies }) => {
     //let f = d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
     
 
-    console.log(vocabularies)
+    //console.log(vocabularies)
     return (
         <div className="list bg-white my-5">
             <table className="table" style={tableBorder}>
@@ -44,16 +44,19 @@ export const List = ({ vocabularies }) => {
                     </tr>
                 </thead>
                     <tbody>
-                        {vocabularies.map((vocabulary) =>
+                        {vocabularies.data.map((vocabulary) =>
                                 <tr key={vocabulary.id}>
                                  <th scope="row" style={insideTable,boxColor}>{vocabulary.id}</th>
-                                    <td style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover,links}>{vocabulary.english}</Link></td>
-                                    <td style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.japanese}</Link></td>
-                                    <td style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.created_at}</Link></td>
+                                    <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover,links}>{vocabulary.english}</Link></td>
+                                    <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.japanese}</Link></td>
+                                    <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.created_at}</Link></td>
                                 </tr>
                             )}
+                            
+                            
                     </tbody>
             </table>
+            
         </div>
     )
 }
