@@ -21,8 +21,11 @@ const Show = (props) => {
 
             <div className="App">
               <div className="container bg-light mt-5">
-                <div className="alert alert-primary pb-0">
-                    <h2>{ vocabulary.english }</h2>
+                <div >
+                    <h2 className="text-5xl italic font-bold pl-8 pt-8">{ vocabulary.english }</h2>
+                    <h2 className="text-5xl font-bold pl-8 pt-7">{ vocabulary.japanese }</h2>
+                    <h3 className="pl-8">Example</h3>
+                    <p>Here is supposed to be example sentences</p>
                 </div>
               </div>
             </div>            
