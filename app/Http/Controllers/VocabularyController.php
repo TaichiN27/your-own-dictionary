@@ -35,4 +35,9 @@ class VocabularyController extends Controller
 
         }
 
+        public function delete(Vocabulary $vocabulary){
+            $vocabulary->delete();
+            return redirect("/");
+        }
+
 }

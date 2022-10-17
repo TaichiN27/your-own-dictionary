@@ -32,6 +32,7 @@ export const List = ({ vocabularies }) => {
     
     let ctn = 0
     let current=0
+
     
 
     //console.log(vocabularies)
@@ -65,7 +66,13 @@ export const List = ({ vocabularies }) => {
                                         time[0] = time[0].replace('-','/');
                                         legitTime = legitTime.replace('-','/');
                                      
-                                    }                                 
+                                    }  
+                                    
+                                let date = time[1].split(".");
+                                let legitDate = date[0]
+                                 
+                                console.log(legitDate)                            
+                             
                                  
                         
                                 return(

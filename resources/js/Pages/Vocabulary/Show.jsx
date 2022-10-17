@@ -10,6 +10,12 @@ const Show = (props) => {
     const { vocabulary } = props; // 追加
     console.log(props)
     
+    const handleDeletePost = (id) => {
+    Inertia.delete(`/vocabularies/${id}`, {
+        onBefore: () => confirm("Are you sure you want to delete this vocabulary??")
+    })
+    }
+    
     
     
     return (
@@ -26,6 +32,8 @@ const Show = (props) => {
                     <h2 className="text-5xl font-bold pl-8 pt-7">{ vocabulary.japanese }</h2>
                     <h3 className="pl-8">Example</h3>
                     <p>Here is supposed to be example sentences</p>
+                    
+                    <button className="p-1 bg-purple-300 hover:bg-purple-400 rounded-md" onClick={() => handleDeletePost(vocabulary.id)}>delete</button>
                 </div>
               </div>
             </div>            

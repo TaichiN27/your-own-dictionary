@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post("/vocabularies", [VocabularyController::class, "store"]);
     Route::get("/", [VocabularyController::class, "index"])->name('index');
     Route::get("/vocabularies/{vocabulary}", [VocabularyController::class, "show"]);
+    Route::delete("/vocabularies/{vocabulary}", [VocabularyController::class, "delete"]);
 });
 
 
