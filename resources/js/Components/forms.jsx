@@ -4,11 +4,13 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link, useForm } from '@inertiajs/inertia-react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
-export const Form = () => {
+export const Form = ({auth}) => {
+    
     
     const {data, setData, post} = useForm({
                 english: "",
                 japanese: "",
+                user_id: auth.user.id
     })
 
 

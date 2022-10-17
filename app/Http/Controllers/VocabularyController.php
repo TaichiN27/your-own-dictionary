@@ -10,11 +10,15 @@ use Inertia\Inertia;
 
 use App\Models\Vocabulary;
 
+use Illuminate\Support\Facades\Auth;
+
 class VocabularyController extends Controller
 {
         public function index(Vocabulary $vocabulary)
         {
+
             return Inertia::render("Vocabulary/Index",["vocabularies" => $vocabulary->getPaginateByLimit()]);
+            
 
         }
         
