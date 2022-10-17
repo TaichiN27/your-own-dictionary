@@ -20,11 +20,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post("/vocabularies", [VocabularyController::class, "store"]);
     Route::get("/", [VocabularyController::class, "index"])->name('index');
     Route::get("/vocabularies/{vocabulary}", [VocabularyController::class, "show"]);
+    Route::delete("/vocabularies/{vocabulary}", [VocabularyController::class, "delete"]);
 });
 
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 require __DIR__.'/auth.php';

@@ -30,6 +30,10 @@ export const List = ({ vocabularies }) => {
 
     //let f = d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
     
+    let ctn = 0
+    let current=0
+
+    
 
     //console.log(vocabularies)
     return (
@@ -44,14 +48,41 @@ export const List = ({ vocabularies }) => {
                     </tr>
                 </thead>
                     <tbody>
-                        {vocabularies.data.map((vocabulary) =>
+                        {vocabularies.data.map((vocabulary) =>{
+                                 function ctnNum() {
+                                     if(current!=vocabulary.id) {
+                                         current=vocabulary.id
+                                         ctn = ctn + 1
+                                         
+                                     }
+                                    return ctn
+                                 }
+                                 
+                                 let time = vocabulary.created_at.split("T");
+                                 let legitTime = time[0].replace('-','/')
+                                 
+                                    while(legitTime !== time[0]) {
+                                     
+                                        time[0] = time[0].replace('-','/');
+                                        legitTime = legitTime.replace('-','/');
+                                     
+                                    }  
+                                    
+                                let date = time[1].split(".");
+                                let legitDate = date[0]
+                                 
+                                console.log(legitDate)                            
+                             
+                                 
+                        
+                                return(
                                 <tr key={vocabulary.id}>
-                                 <th scope="row" style={insideTable,boxColor}>{vocabulary.id}</th>
+                                 <th scope="row" style={insideTable,boxColor}>{ctnNum()}</th>
                                     <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover,links}>{vocabulary.english}</Link></td>
                                     <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.japanese}</Link></td>
-                                    <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{vocabulary.created_at}</Link></td>
-                                </tr>
-                            )}
+                                    <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{legitTime}</Link></td>
+                                </tr>)
+                            })}
                             
                             
                     </tbody>

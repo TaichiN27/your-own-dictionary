@@ -11,6 +11,8 @@ const Index = (props) => {
     const { vocabularies } = props; // 追加
     console.log(vocabularies.links); // 確認用に追加  
     
+    console.log(props)
+    
     const paginationLinks = 
     vocabularies.links.map((link) => {
         if(link.label=="&laquo; Previous" ){
@@ -37,7 +39,7 @@ const Index = (props) => {
               </div>
               <div className="container bg-light mt-5">
                 <div className="alert alert-primary pb-0">
-                    <Form />
+                    <Form auth={props.auth} />
                     <List vocabularies={vocabularies}/>
                 </div>
               </div>
