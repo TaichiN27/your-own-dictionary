@@ -20,6 +20,11 @@ export const Form = ({auth}) => {
         e.preventDefault();
         console.log(data)
         post("/vocabularies");
+        var textForm1 = document.getElementById("form1");
+        textForm1.value = '';
+        var textForm2 = document.getElementById("form2");
+        textForm2.value = '';
+        console.log(data)
 
     }
     
@@ -29,8 +34,8 @@ export const Form = ({auth}) => {
             <h1 className="fs-3 text-center">What's your new vocabulary?</h1>
             <form onSubmit={SubmitHandle}>
                 <div className="form-group row">
-                    English<input type="text" className="form-control-sm col mx-2" onChange={(e)=>setData("english", e.target.value)} required />
-                    Japanese<input type="text" className="form-control-sm col mx-2" onChange={(e)=>setData("japanese", e.target.value)} required />
+                    English<input type="text" className="form-control-sm col mx-2" onChange={(e)=>setData("english", e.target.value)} id="form1" required />
+                    Japanese<input type="text" className="form-control-sm col mx-2" onChange={(e)=>setData("japanese", e.target.value)} id="form2" required />
                     <button type="submit" className="btn btn-primary btn-sm col-2" >Add</button>
                 </div>
 
