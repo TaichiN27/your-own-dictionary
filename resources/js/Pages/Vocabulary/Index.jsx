@@ -13,6 +13,8 @@ const Index = (props) => {
     
     console.log(props)
     
+    
+    
     const paginationLinks = 
     vocabularies.links.map((link) => {
         if(link.label=="&laquo; Previous" ){
@@ -43,6 +45,7 @@ const Index = (props) => {
                     <List vocabularies={vocabularies}/>
                 </div>
               </div>
+              <audio controls src= "https://audio.oxforddictionaries.com/en/mp3/apple__gb_1.mp3"></audio>
                 <div className='paginate text-center mb-3'>
                     {paginationLinks}
                 </div>
