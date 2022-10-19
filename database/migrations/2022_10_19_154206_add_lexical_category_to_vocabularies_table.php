@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('vocabularies', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();   
-            //'category_id' は 'categoriesテーブル' の 'id' を参照する外部キーです
+            $table->string('lexicalCategory', 300);
         });
     }
 

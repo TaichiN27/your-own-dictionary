@@ -13,7 +13,9 @@ class Vocabulary extends Model
     protected $fillable = [
     'english',
     'japanese',
-    'user_id'
+    'user_id',
+    'sentences',
+    'pronunciations',
 ];
 
     public function getPaginateByLimit(int $limit_count = 10) {

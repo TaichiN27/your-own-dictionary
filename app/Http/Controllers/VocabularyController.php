@@ -22,8 +22,8 @@ class VocabularyController extends Controller
         public function index(Vocabulary $vocabulary)
         {
             $response = Http::withHeaders([
-                'app_id' => '9986e994',
-                'app_key' => '448ea028c7536a28b8753ee1f804a078'
+                'app_id' => config('services.dictionary.id'),
+                'app_key' => config('services.dictionary.token')
             ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . "swimming"
             );  
             
@@ -47,6 +47,7 @@ class VocabularyController extends Controller
         {
             
             $response = Http::withHeaders([
+                
                 'app_id' => config('services.dictionary.id'),
                 'app_key' => config('services.dictionary.token')
             ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . $request["english"]
@@ -54,13 +55,22 @@ class VocabularyController extends Controller
             
             $ans = $response->json();
             
-            $senteces = ["senteces" => $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["examples"]];
-            $input = $request->all();
-            $input+=$senteces;
+            $data = Vocabulary::find($request["english"]);;
             
-            $jsondata=json_encode($input, JSON_UNESCAPED_UNICODE);
-            dd($jsondata);
+            $sentences = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"];
+            $sentences = serialize($sentences);
+            $sentences = ["sentences" => $sentences];
+            $pronunciations = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["pronunciations"];
+            $pronunciations = serialize($pronunciations);
+            $pronunciations = ["pronunciations" => $pronunciations];
+            $input = $request->all();
+            $input+=$sentences;
+            $input+=$pronunciations;
+            
+            
+            dd($sentences);
             $vocabulary->fill($input)->save();
+            
         }
         
         public function show(Vocabulary $vocabulary)
