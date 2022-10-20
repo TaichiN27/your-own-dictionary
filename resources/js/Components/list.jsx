@@ -50,7 +50,7 @@ export const List = ({ vocabularies }) => {
                     <tbody>
                         {vocabularies.data.map((vocabulary) =>{
                         
-                        
+                            
                         
                                  function ctnNum() {
                                      if(current!=vocabulary.id) {

@@ -4,7 +4,8 @@ import Authenticated from "@/Layouts/AuthenticatedLayout"
 import { Title } from '@/Components/title';
 import { Form } from '@/Components/forms';
 import { List } from '@/Components/list';
-import { useState } from 'react'
+import { useState } from 'react';
+import { Link } from '@inertiajs/inertia-react';
 
 const Show = (props) => {
     const { vocabulary } = props; // 追加
@@ -39,6 +40,8 @@ const Show = (props) => {
                     <p></p>
                     
                     <button className="p-1 bg-purple-300 hover:bg-purple-400 rounded-md" onClick={() => handleDeletePost(vocabulary.id)}>delete</button>
+                    
+                        <Link href={'/'} >Home</Link>
                 </div>
               </div>
             </div>            

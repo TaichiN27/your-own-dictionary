@@ -54,21 +54,32 @@ class VocabularyController extends Controller
             
             $ans = $response->json();
             
-            $data = Vocabulary::find($request["english"]);;
+            $data = Vocabulary::where('english', $request["english"])->first();
             
-            $sentences = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"];
-            $sentences = json_encode($sentences, true);
-            $sentences = ["sentences" => $sentences];
-            $pronunciations = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["pronunciations"];
-            $pronunciations = json_encode($pronunciations, true);
-            $pronunciations = ["pronunciations" => $pronunciations];
-            $input = $request->all();
-            $input+=$sentences;
-            $input+=$pronunciations;
+            if($data==null){
+                $sentences = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"];
+                $sentences = json_encode($sentences, true);
+                $sentences = ["sentences" => $sentences];
+                $pronunciations = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["pronunciations"];
+                $pronunciations = json_encode($pronunciations, true);
+                $pronunciations = ["pronunciations" => $pronunciations];
+                $input = $request->all();
+                $input+=$sentences;
+                $input+=$pronunciations;
+                
+                
+                
+                $vocabulary->fill($input)->save();
+                return redirect("/vocabularies/".$vocabulary['id']);
+                //dd($vocabulary['id']);
+            } else {
+                dd("Already");
+            }
+           
             
             
-            //dd($sentences);
-            $vocabulary->fill($input)->save();
+            
+
             
         }
         
