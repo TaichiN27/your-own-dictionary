@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('vocabularies', function (Blueprint $table) {
-            $table->string('lexicalCategory', 300);
+            $table->json('pronunciations');
         });
     }
 

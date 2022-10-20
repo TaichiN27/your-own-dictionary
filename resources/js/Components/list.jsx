@@ -49,6 +49,9 @@ export const List = ({ vocabularies }) => {
                 </thead>
                     <tbody>
                         {vocabularies.data.map((vocabulary) =>{
+                        
+                        
+                        
                                  function ctnNum() {
                                      if(current!=vocabulary.id) {
                                          current=vocabulary.id

@@ -9,9 +9,9 @@ import { Link } from '@inertiajs/inertia-react';
 
 const Index = (props) => {
     const { vocabularies } = props; // 追加
-    console.log(vocabularies.links); // 確認用に追加  
+    //console.log(vocabularies.links); // 確認用に追加  
     
-    console.log(props)
+    //console.log(vocabularies.data)
     
     
     
@@ -45,7 +45,6 @@ const Index = (props) => {
                     <List vocabularies={vocabularies}/>
                 </div>
               </div>
-              <audio controls src= "https://audio.oxforddictionaries.com/en/mp3/apple__gb_1.mp3"></audio>
                 <div className='paginate text-center mb-3'>
                     {paginationLinks}
                 </div>
