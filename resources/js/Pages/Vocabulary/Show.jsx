@@ -8,7 +8,11 @@ import { useState } from 'react'
 
 const Show = (props) => {
     const { vocabulary } = props; // 追加
-    console.log(props)
+    const examples = JSON.parse(vocabulary.sentences);
+    console.log(examples)
+
+    
+    
     
     const handleDeletePost = (id) => {
     Inertia.delete(`/vocabularies/${id}`, {
@@ -30,8 +34,9 @@ const Show = (props) => {
                 <div >
                     <h2 className="text-5xl italic font-bold pl-8 pt-8">{ vocabulary.english }</h2>
                     <h2 className="text-5xl font-bold pl-8 pt-7">{ vocabulary.japanese }</h2>
-                    <h3 className="pl-8">Example</h3>
-                    <p>Here is supposed to be example sentences</p>
+                    <h3 className="pl-8">{ examples[0].examples[0].text }</h3>
+                    <audio controls src= "https://audio.oxforddictionaries.com/en/mp3/apple__gb_1.mp3"></audio>
+                    <p></p>
                     
                     <button className="p-1 bg-purple-300 hover:bg-purple-400 rounded-md" onClick={() => handleDeletePost(vocabulary.id)}>delete</button>
                 </div>

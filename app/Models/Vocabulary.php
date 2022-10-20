@@ -18,6 +18,12 @@ class Vocabulary extends Model
     'pronunciations',
 ];
 
+
+    protected $casts = [
+        'sentences'  => 'json',
+        'pronunciations'  => 'json'
+    ];
+    
     public function getPaginateByLimit(int $limit_count = 10) {
             $id = Auth::id();
 
