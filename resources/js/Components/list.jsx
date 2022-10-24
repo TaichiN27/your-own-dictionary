@@ -1,4 +1,117 @@
-import React from 'react'
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Inertia } from "@inertiajs/inertia";
+import { Link } from '@inertiajs/inertia-react';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.common.white,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
+function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+}
+
+
+
+
+
+
+
+export const List = ({ vocabularies }) => {
+    
+    
+    let ctn = 0
+    let current = 0
+
+    
+    return (
+        <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>No.</StyledTableCell>
+            <StyledTableCell align="right">English</StyledTableCell>
+            <StyledTableCell align="right">Japanese</StyledTableCell>
+            <StyledTableCell align="right">Date</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        
+          {vocabularies.data.map((vocabulary) => {
+            function ctnNum() {
+                if(current!=vocabulary.id) {
+                        current=vocabulary.id
+                        ctn = ctn + 1
+                                         
+                    }
+                    return ctn
+             }
+             
+                let time = vocabulary.created_at.split("T");
+                let legitTime = time[0].replace('-','/')
+                                             
+                while(legitTime !== time[0]) {
+                                                 
+                    time[0] = time[0].replace('-','/');
+                    legitTime = legitTime.replace('-','/');
+                                                 
+                     }  
+                                    
+        let date = time[1].split(".");
+        let legitDate = date[0]
+        
+            function jumpToLink() {
+                console.log(vocabulary.id)
+                window.location.replace("/vocabularies/" + vocabulary.id)
+            }
+                                 
+              return(         
+              <StyledTableRow hover onClick={jumpToLink}>
+              <StyledTableCell component="th" scope="row">
+                {ctnNum()}
+              </StyledTableCell>
+              <StyledTableCell align="right">{vocabulary.english}</StyledTableCell>
+              <StyledTableCell align="right">{vocabulary.japanese}</StyledTableCell>
+              <StyledTableCell align="right">{legitTime}</StyledTableCell>
+            </StyledTableRow>
+            )
+              
+          
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    );
+}
+
+
+
+
+
+/*import React from 'react'
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from '@inertiajs/inertia-react';
 
@@ -7,27 +120,22 @@ import { Link } from '@inertiajs/inertia-react';
 export const List = ({ vocabularies }) => {
     const tableBorder = {
         borderCollapse: "collapse",
-        /* テーブルの罫線を重ねて1本に見せる */
-        border: "2px solid green" /* テーブルの外側の枠線(2pxで緑色の実線) */
+
+        border: "2px solid green" 
     }
-    /* ▼セル共通の装飾 */
     const insideTable = {
-        border: "1px solid green" /* テーブルの内側の罫線(1pxで緑色の実線) */
+        border: "1px solid green" 
     }
-    /* ▼見出しセルの装飾 */
     const boxColor = {
         backgroundColor: "#ccffcc",
-        /* 背景色(淡い緑色) */
-        padding: "0.3em" /* 内側の余白(0.3文字分) */
+        padding: "0.3em" 
     }
-    /* ▼リンクの上にマウスが載った際の装飾(背景色だけ指定) */
     const hover = { BackgroundColor: "#fcfcaa" }
 
 
     const links = {
         display: "block",
-        /* リンクをブロックレベル化して表示 */
-        padding: "0.6em 1em" /* 内側の余白量を上下に0.6文字分＆左右に1文字分にする */
+        padding: "0.6em 1em" 
     }
     //let d = new Date(Date.parse(list.created));
 
@@ -95,4 +203,4 @@ export const List = ({ vocabularies }) => {
             
         </div>
     )
-}
+}*/
