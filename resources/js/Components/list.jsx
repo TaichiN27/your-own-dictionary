@@ -48,7 +48,7 @@ export const List = ({ vocabularies }) => {
 
     
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className="mt-5 mb-5">
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>

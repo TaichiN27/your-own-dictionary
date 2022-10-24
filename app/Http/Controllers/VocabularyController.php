@@ -74,11 +74,15 @@ class VocabularyController extends Controller
                 $pronunciations = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["pronunciations"];
                 $pronunciations = json_encode($pronunciations, true);
                 $pronunciations = ["pronunciations" => $pronunciations];
+                $lexicalCategory = $ans["results"][0]["lexicalEntries"][0]["lexicalCategory"];
+                $lexicalCategory = json_encode($lexicalCategory, true);
+                $lexicalCategory = ["lexicalCategory" => $lexicalCategory];
                 $input = $request->all();
                 $input+=$sentences;
                 $input+=$pronunciations;
+                $input+=$lexicalCategory;
                 
-                //dd("register");
+                //dd($ans["results"][0]["lexicalEntries"][0]["lexicalCategory"]);
                 
                 
                 

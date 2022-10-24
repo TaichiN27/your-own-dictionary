@@ -12,10 +12,9 @@ const Show = (props) => {
     const { vocabulary } = props; // 追加
     const examples = JSON.parse(vocabulary.sentences);
     const pronunciations = JSON.parse(vocabulary.pronunciations);
-    console.log(examples)
-
-    console.log(vocabulary)
-    console.log(pronunciations)
+    const lexicalCategory = JSON.parse(vocabulary.lexicalCategory)
+    console.log(lexicalCategory.text)
+    //console.log(pronunciations)
     
     const { flash } = usePage().props
 
@@ -42,44 +41,58 @@ const Show = (props) => {
             }>
 
             <div className="App">
-              <div className="container bg-light mt-5">
+              <div className="container mx-auto px-12 bg-light">
                 <div >
                         {flash.message && (foundData())}
+                        <div className="flex justify-start">
                         <h2 className="text-5xl italic font-bold pl-8 pt-8">{ vocabulary.english }</h2>
+                        <h2 className="text-base font-semibold pb-0">{ lexicalCategory.text }</h2>
+                        </div>
                         <h2 className="text-5xl font-bold pl-8 pt-7">{ vocabulary.japanese }</h2>
-                        <h2 className="text3xl font-bold">English Definitions</h2>
+                        
+                        <div className="mt-9">
+                        <h2 className="text-3xl font-bold">English Definitions</h2>
                     {examples.map((example) =>{
                         console.log(example.definitions)
                     return(
                         <div>
-                                <p className="pl-8">{example.definitions}</p>
+                                <p className="pl-8 text-lg">• {example.definitions}</p>
                         </div>   
                         )
                     } )}
-                    
-                    <h2 className="text3xl font-bold">Example sentenses</h2>
-                    
+                        </div>
+                        
+                        
+                        <div className="mt-9">
+                    <h2 className="text-3xl font-bold">Example sentenses</h2>
                     {examples[0].examples.map((example) =>{
-                        console.log(example.text)
                     return(
                         <div>
-                                <p className="pl-8">{example.text}</p>
+                                <p className="pl-8 text-lg">• {example.text}</p>
                         </div>   
                         )
                     } )}
-                    <h2 className="text3xl font-bold">Pronunciations</h2>
-                                <audio controls src= {pronunciations[0].audioFile}></audio>  
-                                <p>{pronunciations[0].phoneticSpelling}</p>
+                        </div>
                     
-                    <h2 className="text3xl font-bold">Synonyms</h2>
+                    
+                        <div className="mt-9">
+                    <h2 className="text-3xl font-bold">Pronunciations</h2>
+                                <audio controls src= {pronunciations[0].audioFile}></audio>  
+                                <p className="text-lg">{pronunciations[0].phoneticSpelling}</p>
+                                
+                        </div>
+                        
+                        
+                        <div className="mt-9">
+                    <h2 className="text-3xl font-bold">Synonyms</h2>
                     {examples[0].synonyms.map((synonym) =>{
-                        console.log(synonym.text)
                     return(
                         <div>
-                                <p className="pl-8">{synonym.text}</p>
+                                <p className="pl-8 text-lg">• {synonym.text}</p>
                         </div>   
                         )
                     } )}
+                        </div>
                     
                     <button className="p-1 bg-purple-300 hover:bg-purple-400 rounded-md" onClick={() => handleDeletePost(vocabulary.id)}>delete</button>
                     

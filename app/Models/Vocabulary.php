@@ -16,6 +16,7 @@ class Vocabulary extends Model
     'user_id',
     'sentences',
     'pronunciations',
+    'lexicalCategory'
 ];
 
 
