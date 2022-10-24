@@ -45,18 +45,29 @@ class VocabularyController extends Controller
         public function store(VocabularyRequest $request, Vocabulary $vocabulary)
         {
             
-            $response = Http::withHeaders([
-                
-                'app_id' => config('services.dictionary.id'),
-                'app_key' => config('services.dictionary.token')
-            ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . $request["english"]
-            ); 
+        
+            $id = Auth::id();
+
+            $data = Vocabulary::where([['english', $request["english"]], ['user_id', $id]])->first();
             
-            $ans = $response->json();
             
-            $data = Vocabulary::where('english', $request["english"])->first();
+            $user = Vocabulary::where('user_id', $id)->first();
+            
+            //dd($data);
             
             if($data==null){
+                $response = Http::withHeaders([
+                    
+                    'app_id' => config('services.dictionary.id'),
+                    'app_key' => config('services.dictionary.token')
+                ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . $request["english"]
+                ); 
+                
+                
+                
+                $ans = $response->json();
+                
+                if(!(isset($ans['error']))) {
                 $sentences = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"];
                 $sentences = json_encode($sentences, true);
                 $sentences = ["sentences" => $sentences];
@@ -67,13 +78,22 @@ class VocabularyController extends Controller
                 $input+=$sentences;
                 $input+=$pronunciations;
                 
+                //dd("register");
+                
                 
                 
                 $vocabulary->fill($input)->save();
-                return redirect("/vocabularies/".$vocabulary['id']);
                 //dd($vocabulary['id']);
+                return redirect("/vocabularies/".$vocabulary['id']);                    
+                } else {
+                    return redirect('/')->with('message', 'This word was not found in the dictionary.');
+                }
+
+                
             } else {
-                dd("Already");
+                //dd("already");
+                
+                return redirect("/vocabularies/".$data['id'])->with('message', 'Already registered.');
             }
            
             

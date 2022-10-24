@@ -6,12 +6,21 @@ import { Form } from '@/Components/forms';
 import { List } from '@/Components/list';
 import { useState } from 'react'
 import { Link } from '@inertiajs/inertia-react';
+import { usePage } from '@inertiajs/inertia-react';
 
 const Index = (props) => {
     const { vocabularies } = props; // 追加
-    //console.log(vocabularies.links); // 確認用に追加  
+    //console.log(vocabularies); // 確認用に追加  
     
     //console.log(vocabularies.data)
+    
+    const { flash } = usePage().props
+    
+    console.log(flash);
+    
+    function alerting() {
+        alert(flash.message)
+    }
     
     
     
@@ -41,6 +50,7 @@ const Index = (props) => {
               </div>
               <div className="container bg-light mt-5">
                 <div className="alert alert-primary pb-0">
+                        {flash.message && (alerting())}
                     <Form auth={props.auth} />
                     <List vocabularies={vocabularies}/>
                 </div>
