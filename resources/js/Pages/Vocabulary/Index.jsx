@@ -16,7 +16,7 @@ const Index = (props) => {
     
     const { flash } = usePage().props
     
-    console.log(flash);
+    //console.log(flash);
     
     function alerting() {
         alert(flash.message)

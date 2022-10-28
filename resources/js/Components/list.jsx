@@ -16,7 +16,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
+        fontSize: 24,
     },
 }));
 
@@ -42,7 +42,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 export const List = ({ vocabularies }) => {
     
-    
+    console.log(vocabularies.data)
     let ctn = 0
     let current = 0
 
@@ -93,9 +93,9 @@ export const List = ({ vocabularies }) => {
               <StyledTableCell component="th" scope="row">
                 {ctnNum()}
               </StyledTableCell>
-              <StyledTableCell align="right">{vocabulary.english}</StyledTableCell>
-              <StyledTableCell align="right">{vocabulary.japanese}</StyledTableCell>
-              <StyledTableCell align="right">{legitTime}</StyledTableCell>
+              <StyledTableCell align="right" className="cursor-pointer">{vocabulary.english}</StyledTableCell>
+              <StyledTableCell align="right" className="cursor-pointer">{vocabulary.japanese}</StyledTableCell>
+              <StyledTableCell align="right" className="cursor-pointer">{legitTime}</StyledTableCell>
             </StyledTableRow>
             )
               
