@@ -21,19 +21,6 @@ class VocabularyController extends Controller
 {
         public function index(Vocabulary $vocabulary)
         {
-            /*$response = Http::withHeaders([
-                'app_id' => config('services.dictionary.id'),
-                'app_key' => config('services.dictionary.token')
-            ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . "swimming"
-            );  
-            
-            $ans = $response->json();*/
-            
-            //dd($ans);
-            
-            
-            
-             
             return Inertia::render("Vocabulary/Index",["vocabularies" => $vocabulary->getPaginateByLimit()
             ]);
             
@@ -74,11 +61,15 @@ class VocabularyController extends Controller
                 $pronunciations = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["pronunciations"];
                 $pronunciations = json_encode($pronunciations, true);
                 $pronunciations = ["pronunciations" => $pronunciations];
+                $lexicalCategory = $ans["results"][0]["lexicalEntries"][0]["lexicalCategory"];
+                $lexicalCategory = json_encode($lexicalCategory, true);
+                $lexicalCategory = ["lexicalCategory" => $lexicalCategory];
                 $input = $request->all();
                 $input+=$sentences;
                 $input+=$pronunciations;
+                $input+=$lexicalCategory;
                 
-                //dd("register");
+                //dd($ans["results"][0]["lexicalEntries"][0]["lexicalCategory"]);
                 
                 
                 
@@ -113,6 +104,26 @@ class VocabularyController extends Controller
         public function delete(Vocabulary $vocabulary){
             $vocabulary->delete();
             return redirect("/");
+        }
+        
+        public function quiz(Vocabulary $vocabulary){
+            
+            $id = Auth::id();
+            $data = Vocabulary::where('user_id', $id)->inRandomOrder()->take(10)->get();
+            //$vocabulary += $data;
+            $data=json_decode($data);
+            
+            
+            $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
+            
+            //dd($data);
+            
+           
+            
+            
+            
+            
+            return Inertia::render("Vocabulary/Quiz",["vocabularies" => $vocabulary->get(), "datas" => $data]);
         }
 
 }

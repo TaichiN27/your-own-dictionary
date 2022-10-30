@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get("/", [VocabularyController::class, "index"])->name('index');
     Route::get("/vocabularies/{vocabulary}", [VocabularyController::class, "show"]);
     Route::delete("/vocabularies/{vocabulary}", [VocabularyController::class, "delete"]);
+    Route::get("/quiz", [VocabularyController::class, "quiz"])->name('quiz');
 });
 
 

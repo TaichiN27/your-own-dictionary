@@ -3,7 +3,7 @@ import { Inertia } from "@inertiajs/inertia";
 import Authenticated from "@/Layouts/AuthenticatedLayout"
 import { Title } from '@/Components/title';
 import { Form } from '@/Components/forms';
-import { List } from '@/Components/list';
+import { List }  from '@/Components/list';
 import { useState } from 'react'
 import { Link } from '@inertiajs/inertia-react';
 import { usePage } from '@inertiajs/inertia-react';
@@ -16,7 +16,7 @@ const Index = (props) => {
     
     const { flash } = usePage().props
     
-    console.log(flash);
+    //console.log(flash);
     
     function alerting() {
         alert(flash.message)
