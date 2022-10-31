@@ -67,7 +67,6 @@ export const Questions = (props) => {
   const questions =
   props.props.datas.map(data => {
     randomFakeAns(fakeAns, data.japanese)
-    console.log("hey");
   return(  [
     {
       questionText:data.english,
