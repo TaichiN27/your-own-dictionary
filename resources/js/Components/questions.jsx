@@ -21,10 +21,10 @@ const bull = (
 
 
 export const Questions = (props) => {
-    
 
-    console.log(props.props)
-    
+
+    //console.log(props.props)
+
  function arrayShuffle(array) {
   for(var i = (array.length - 1); 0 < i; i--){
 
@@ -37,32 +37,61 @@ export const Questions = (props) => {
     array[r] = tmp;
   }
   return array;
-  } 
-  
-  const questions = 
-  props.props.datas.map(data => 
-  [
+  }
+
+  //make fake answers for other 2 options
+  const fakeAns = props.props.fakeAns
+  console.log(fakeAns);
+  let ansCheck = true;
+  let ansOption = []
+  function randomFakeAns(array,legitAns) {
+    while(ansCheck==true) {
+        if (array[Math.floor(Math.random()*array.length)].japanese == legitAns ) {
+            ansCheck = true;
+        } else {
+            if(!(ansOption.includes(array[Math.floor(Math.random()*array.length)].japanese))  && array[Math.floor(Math.random()*array.length)].japanese!==legitAns){
+                ansOption.push(array[Math.floor(Math.random()*array.length)].japanese);
+                if(ansOption.length==2) {
+                    ansCheck = false;
+                } else {
+                    ansCheck = true;
+                }
+            } else {
+                ansCheck = true;
+            }
+
+        }
+    }
+  }
+
+
+  const questions =
+  props.props.datas.map(data => {
+    let otherAns = randomFakeAns(fakeAns, data.japanese)
+    console.log(otherAns);
+  return(  [
     {
       questionText:data.english,
-      answerOptions:arrayShuffle([
+      answerOptions:[
         {answerText:data.japanese,isCorrect:true},
-        {answerText:'ベクトル',isCorrect:false},
-        {answerText:'2次曲線',isCorrect:false},
-      ]),
-    }]  
-    
+        {answerText:ansOption[0], isCorrect:false},
+        {answerText:ansOption[1],isCorrect:false},
+      ]
+    }])
+   }
 
-    
-    
+
+
+
   );
-  
-  console.log(questions[0][0].questionText);
-  console.log(questions[0]);
+
+  //console.log(questions[0][0].questionText);
+  //console.log(questions[0]);
 
 
-  
-  
-  const [currentQuestion,setCurrentQuestion] = useState(0);  
+
+
+  const [currentQuestion,setCurrentQuestion] = useState(0);
 
   const handleAnswerButtonClick = () => {
 
@@ -72,12 +101,12 @@ export const Questions = (props) => {
       setCurrentQuestion(nextQuestion);
     }
   }
-    
+
     return (
     <div>
 
-            
-            
+
+
         <div className="w-4/5 mt-8 text-center mx-auto">
         <Card sx={{ minWidth: 275 }}>
           <CardContent>
@@ -98,18 +127,13 @@ export const Questions = (props) => {
           </CardActions>
         </Card>
         </div>
-            
-            
-            
-            
-            
+
+
+
+
+
     </div>
-        
+
         )
- 
+
 }
-
-
-
-
-
