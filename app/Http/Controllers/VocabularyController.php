@@ -23,37 +23,37 @@ class VocabularyController extends Controller
         {
             return Inertia::render("Vocabulary/Index",["vocabularies" => $vocabulary->getPaginateByLimit()
             ]);
-            
-            
+
+
 
         }
-        
+
 
         public function store(VocabularyRequest $request, Vocabulary $vocabulary)
         {
-            
-        
+
+
             $id = Auth::id();
 
             $data = Vocabulary::where([['english', $request["english"]], ['user_id', $id]])->first();
-            
-            
+
+
             $user = Vocabulary::where('user_id', $id)->first();
-            
+
             //dd($data);
-            
+
             if($data==null){
                 $response = Http::withHeaders([
-                    
+
                     'app_id' => config('services.dictionary.id'),
                     'app_key' => config('services.dictionary.token')
                 ])->get("https://od-api.oxforddictionaries.com:443/api/v2/entries/"  . "en-gb" . "/" . $request["english"]
-                ); 
-                
-                
-                
+                );
+
+
+
                 $ans = $response->json();
-                
+
                 if(!(isset($ans['error']))) {
                 $sentences = $ans["results"][0]["lexicalEntries"][0]["entries"][0]["senses"];
                 $sentences = json_encode($sentences, true);
@@ -68,32 +68,32 @@ class VocabularyController extends Controller
                 $input+=$sentences;
                 $input+=$pronunciations;
                 $input+=$lexicalCategory;
-                
+
                 //dd($ans["results"][0]["lexicalEntries"][0]["lexicalCategory"]);
-                
-                
-                
+
+
+
                 $vocabulary->fill($input)->save();
                 //dd($vocabulary['id']);
-                return redirect("/vocabularies/".$vocabulary['id']);                    
+                return redirect("/vocabularies/".$vocabulary['id']);
                 } else {
                     return redirect('/')->with('message', 'This word was not found in the dictionary.');
                 }
 
-                
+
             } else {
                 //dd("already");
-                
+
                 return redirect("/vocabularies/".$data['id'])->with('message', 'Already registered.');
             }
-           
-            
-            
-            
 
-            
+
+
+
+
+
         }
-        
+
         public function show(Vocabulary $vocabulary)
         {
             //dd(json_decode($vocabulary["pronunciations"]));
@@ -105,25 +105,27 @@ class VocabularyController extends Controller
             $vocabulary->delete();
             return redirect("/");
         }
-        
+
         public function quiz(Vocabulary $vocabulary){
-            
+
             $id = Auth::id();
             $data = Vocabulary::where('user_id', $id)->inRandomOrder()->take(10)->get();
             //$vocabulary += $data;
             $data=json_decode($data);
-            
-            
+
+
             $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
-            
+
             //dd($data);
-            
-           
-            
-            
-            
-            
-            return Inertia::render("Vocabulary/Quiz",["vocabularies" => $vocabulary->get(), "datas" => $data]);
+            $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
+            $fakeAns = json_decode($fakeAns);
+
+
+
+
+
+
+            return Inertia::render("Vocabulary/Quiz",["datas" => $data, "fakeAns" => $fakeAns]);
         }
 
 }
