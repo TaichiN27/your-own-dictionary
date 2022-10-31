@@ -41,7 +41,6 @@ export const Questions = (props) => {
 
   //make fake answers for other 2 options
   const fakeAns = props.props.fakeAns
-  console.log(fakeAns);
   let ansCheck = true;
   let ansOption = []
   function randomFakeAns(array,legitAns) {
@@ -67,8 +66,7 @@ export const Questions = (props) => {
 
   const questions =
   props.props.datas.map(data => {
-    let otherAns = randomFakeAns(fakeAns, data.japanese)
-    console.log(otherAns);
+    randomFakeAns(fakeAns, data.japanese)
   return(  [
     {
       questionText:data.english,
