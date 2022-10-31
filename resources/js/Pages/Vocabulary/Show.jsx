@@ -20,9 +20,9 @@ const Show = (props) => {
     const examples = JSON.parse(vocabulary.sentences);
     const pronunciations = JSON.parse(vocabulary.pronunciations);
     const lexicalCategory = JSON.parse(vocabulary.lexicalCategory)
-    console.log(lexicalCategory.text)
+    console.log(examples[0])
     //console.log(pronunciations)
-    
+
     const { flash } = usePage().props
 
 
@@ -33,23 +33,23 @@ const Show = (props) => {
             onBefore: () => confirm("Are you sure you want to delete this vocabulary??")
         })
     }
-    
-    
+
+
     function handleHome() {
         window.location.replace('/')
     }
-    
+
     function foundData() {
         alert(flash.message)
     }
-    
+
   return (
     <div>
         <Authenticated auth={props.auth} header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Index
                 </h2>
-            }>    
+            }>
         {flash.message && (foundData())}
         <h2 className="text-base font-semibold bg-amber-300 text-2xl pl-3">{ lexicalCategory.text }</h2>
         <h2 className="text-5xl italic font-bold pl-8 pt-8">{ vocabulary.english }</h2>
@@ -69,7 +69,7 @@ const Show = (props) => {
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {example.definitions}</p>
-                        </div>   
+                        </div>
                         )
                     } )}
           </Typography>
@@ -85,13 +85,15 @@ const Show = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-                    {examples[0].examples.map((example) =>{
+            {("examples" in examples[0]) ?
+                    examples[0].examples.map((example) =>{
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {example.text}</p>
-                        </div>   
+                        </div>
                         )
-                    } )}
+                    } ) : <div></div>
+                }
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -106,7 +108,7 @@ const Show = (props) => {
         <AccordionDetails>
           <Typography>
                                 <p className="text-lg">{pronunciations[0].phoneticSpelling}</p>
-                                <audio controls src= {pronunciations[0].audioFile}></audio>  
+                                <audio controls src= {pronunciations[0].audioFile}></audio>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -120,19 +122,22 @@ const Show = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-                    {examples[0].synonyms.map((synonym) =>{
+                {("synonyms" in examples[0]) ?
+                    examples[0].synonyms.map((synonym) =>{
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {synonym.text}</p>
-                        </div>   
+                        </div>
                         )
-                    } )}
+                    } ) : <div></div>
+                }
+
           </Typography>
         </AccordionDetails>
       </Accordion>
-      
+
                 <DeleteIcon data-testid="DeleteIcon" className="ml-8 mr-4 hover:bg-purple-400 cursor-pointer" fontSize="large" onClick={() => handleDeletePost(vocabulary.id)} />
-                    
+
                 <HomeIcon className="m-4 hover:bg-purple-400 cursor-pointer" fontSize="large" onClick={handleHome} />
     </Authenticated>
     </div>
@@ -155,7 +160,7 @@ const Show = (props) => {
                         <h2 className="text-5xl italic font-bold pl-8 pt-8">{ vocabulary.english }</h2>
                         </div>
                         <h2 className="text-5xl font-bold pl-8 pt-7">{ vocabulary.japanese }</h2>
-                        
+
                         <div className="mt-9">
                         <h2 className="text-3xl font-bold">English Definitions</h2>
                     {examples.map((example) =>{
@@ -163,48 +168,48 @@ const Show = (props) => {
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {example.definitions}</p>
-                        </div>   
+                        </div>
                         )
                     } )}
                         </div>
-                        
-                        
+
+
                         <div className="mt-9">
                     <h2 className="text-3xl font-bold">Example sentenses</h2>
                     {examples[0].examples.map((example) =>{
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {example.text}</p>
-                        </div>   
+                        </div>
                         )
                     } )}
                         </div>
-                    
-                    
+
+
                         <div className="mt-9">
                                 <h2 className="text-3xl font-bold">Pronunciations</h2>
                                 <p className="text-lg">{pronunciations[0].phoneticSpelling}</p>
-                                <audio controls src= {pronunciations[0].audioFile}></audio>  
-                                
+                                <audio controls src= {pronunciations[0].audioFile}></audio>
+
                         </div>
-                        
-                        
+
+
                         <div className="mt-9">
                     <h2 className="text-3xl font-bold">Synonyms</h2>
                     {examples[0].synonyms.map((synonym) =>{
                     return(
                         <div>
                                 <p className="pl-8 text-lg">• {synonym.text}</p>
-                        </div>   
+                        </div>
                         )
                     } )}
                         </div>
-                    
+
                     <DeleteIcon data-testid="DeleteIcon" className="ml-8 mr-4 hover:bg-purple-400 cursor-pointer" fontSize="large" onClick={() => handleDeletePost(vocabulary.id)} />
-                    
+
                     <HomeIcon className="m-4 hover:bg-purple-400 cursor-pointer" fontSize="large" onClick={handleHome} />
                 </div>
-            </div>            
+            </div>
         </Authenticated>
     );*/
 }

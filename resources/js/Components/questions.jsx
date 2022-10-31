@@ -45,10 +45,14 @@ export const Questions = (props) => {
   let ansOption = []
   function randomFakeAns(array,legitAns) {
     while(ansCheck==true) {
-        if (array[Math.floor(Math.random()*array.length)].japanese == legitAns ) {
+        if (array[Math.floor(Math.random()*array.length)].japanese === legitAns ) {
             ansCheck = true;
+            console.log(array[Math.floor(Math.random()*array.length)].japanese);
+            console.log(legitAns);
+            continue;
+
         } else {
-            if(!(ansOption.includes(array[Math.floor(Math.random()*array.length)].japanese))  && array[Math.floor(Math.random()*array.length)].japanese!==legitAns){
+            if(!(ansOption.includes(array[Math.floor(Math.random()*array.length)].japanese))){
                 ansOption.push(array[Math.floor(Math.random()*array.length)].japanese);
                 if(ansOption.length==2) {
                     ansCheck = false;

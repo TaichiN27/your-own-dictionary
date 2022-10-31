@@ -21,10 +21,10 @@ const bull = (
 
 
 const Quiz = (props) => {
-  
 
-  
- 
+
+
+
  function arrayShuffle(array) {
   for(var i = (array.length - 1); 0 < i; i--){
 
@@ -37,10 +37,10 @@ const Quiz = (props) => {
     array[r] = tmp;
   }
   return array;
-  } 
-  
-  const questions = 
-  props.datas.map(data => 
+  }
+
+  const questions =
+  props.datas.map(data =>
   [
     {
       questionText:data.english,
@@ -49,20 +49,20 @@ const Quiz = (props) => {
         {answerText:'ベクトル',isCorrect:false},
         {answerText:'2次曲線',isCorrect:false},
       ]),
-    }]  
-    
+    }]
 
-    
-    
+
+
+
   );
-  
-  console.log(questions[0][0].questionText);
-  console.log(questions[0]);
 
 
-  
-  
-  const [currentQuestion,setCurrentQuestion] = useState(0);  
+
+
+
+
+
+  const [currentQuestion,setCurrentQuestion] = useState(0);
 
   const handleAnswerButtonClick = () => {
 
@@ -72,25 +72,25 @@ const Quiz = (props) => {
       setCurrentQuestion(nextQuestion);
     }
   }
-    
+
     return (
     <div>
         <Authenticated auth={props.auth} header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Index
                 </h2>
-            }> 
-            
-            
+            }>
+
+
         <Questions props={props} />
-            
-            
-            
-            
-            
+
+
+
+
+
         </Authenticated>
     </div>
-        
+
         )
 }
 
