@@ -109,23 +109,26 @@ class VocabularyController extends Controller
         public function quiz(Vocabulary $vocabulary){
 
             $id = Auth::id();
-            $data = Vocabulary::where('user_id', $id)->inRandomOrder()->take(10)->get();
+            $data = Vocabulary::where('user_id', $id)->inRandomOrder()->take(30)->get();
             //$vocabulary += $data;
-            $data=json_decode($data);
+            //$data=json_decode($data);
 
 
-            $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
+            /*$fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
 
             //dd($data);
             $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
             $fakeAns = json_decode($fakeAns);
 
+            //dd($fakeAns);*/
 
 
 
 
 
-            return Inertia::render("Vocabulary/Quiz",["datas" => $data, "fakeAns" => $fakeAns]);
+
+
+            return Inertia::render("Vocabulary/Quiz",["data"=>$data]);
         }
 
 }
