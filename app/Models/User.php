@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nationality'
     ];
 
     /**
@@ -41,9 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function vocabularies()   
+
+    public function vocabularies()
     {
-        return $this->hasMany(Vocabulary::class);  
+        return $this->hasMany(Vocabulary::class);
     }
 }

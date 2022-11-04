@@ -30,10 +30,16 @@ export const Questions = (props) => {
     let wrongAns = props.wrongAns;
     let setCorrectAns = props.setCorrectAns;
     let setWrongAns = props.setWrongAns;
+    let currentSituation = props.currentSituation;
+    let setCurrentSituation = props.setCurrentSituation
+
+
 
 
 
     const [currentQuestion,setCurrentQuestion] = useState(0);
+    console.log(data.length);
+    console.log(data.length-currentQuestion);
   function arrayShuffle(array) {
     for(var i = (array.length - 1); 0 < i; i--){
 
@@ -48,36 +54,42 @@ export const Questions = (props) => {
   return array;
   }
 
+  let randomArray = arrayShuffle(numArray)
 
+  console.log(data);
+  console.log(data.length);
 
   const handleAnswerButtonClick = (e) => {
-    console.log(e.target.value);
-    console.log(data[currentQuestion].japanese);
     if (e.target.value == data[currentQuestion].japanese) {
         console.log(data[currentQuestion]);
         setCorrectAns([...correctAns, data[currentQuestion]])
         console.log(correctAns);
-        /*const music = new Audio('/storage/app/public/Quiz-Buzzer02-1.mp3');
-        music.play();*/
+        const music = new Audio('/audios/Quiz-Buzzer02-1.mp3');
+        music.play();
         console.log(true);
     } else {
         console.log(false);
         setWrongAns([...wrongAns, data[currentQuestion]])
-        console.log("hey");
+        const music = new Audio('/audios/Quiz-Wrong_Buzzer02-1.mp3');
+        music.play();
     }
     const nextQuestion = currentQuestion + 3;
 
-    if(nextQuestion < 10 || currentQuestion < data/3){
+    if(nextQuestion<data.length){
       setCurrentQuestion(nextQuestion);
     } else {
-        alert("FINISH");
-        setShowResult(true);
-        console.log(showResult);
+        //alert("FINISH");
+        setCurrentSituation("Result");
+        console.log(currentSituation)
 
     }
 
 
   }
+
+  function moveToResult() {
+    setCurrentSituation("Result")
+}
 
     return (
     <div>
@@ -94,13 +106,13 @@ export const Questions = (props) => {
                   {data[currentQuestion].english}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary"  spacing={2} direction="row">
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+numArray[0]].japanese}>{data[currentQuestion+numArray[0]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+numArray[1]].japanese}>{data[currentQuestion+numArray[1]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+numArray[2]].japanese}>{data[currentQuestion+numArray[2]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+randomArray[0]].japanese}>{data[currentQuestion+randomArray[0]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[1]].japanese}>{data[currentQuestion+randomArray[1]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[2]].japanese}>{data[currentQuestion+randomArray[2]].japanese}</Button>
                 </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Quite</Button>
+            <Button size="small" onClick={moveToResult}>Quite</Button>
           </CardActions>
         </Card>
         </div>

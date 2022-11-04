@@ -10,21 +10,21 @@ import { usePage } from '@inertiajs/inertia-react';
 
 const Index = (props) => {
     const { vocabularies } = props; // 追加
-    //console.log(vocabularies); // 確認用に追加  
-    
-    //console.log(vocabularies.data)
-    
+    //console.log(vocabularies); // 確認用に追加
+
+    console.log(props.auth)
+
     const { flash } = usePage().props
-    
+
     //console.log(flash);
-    
+
     function alerting() {
         alert(flash.message)
     }
-    
-    
-    
-    const paginationLinks = 
+
+
+
+    const paginationLinks =
     vocabularies.links.map((link) => {
         if(link.label=="&laquo; Previous" ){
             return <Link href={link.url} className="text-base  text-center mx-3">Previous page</Link>
@@ -34,8 +34,8 @@ const Index = (props) => {
             return <Link href={link.url} className="text-lg  text-center mx-1">{link.label}</Link>
         }
         });
-    
-    
+
+
     return (
         <Authenticated auth={props.auth} header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -58,7 +58,7 @@ const Index = (props) => {
                 <div className='paginate text-center mb-3'>
                     {paginationLinks}
                 </div>
-            </div>            
+            </div>
         </Authenticated>
         );
 }

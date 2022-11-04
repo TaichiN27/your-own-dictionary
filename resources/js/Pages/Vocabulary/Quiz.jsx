@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { Questions }  from '@/Components/questions';
 import { ShowResult }  from '@/Components/showResult';
+import { StartQuestions }  from '@/Components/startQuestions';
 import Authenticated from "@/Layouts/AuthenticatedLayout"
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -22,17 +23,25 @@ const bull = (
 
 
 const Quiz = (props) => {
-
-  const [currentQuestion,setCurrentQuestion] = useState(0);
+    const [currentSituation,setCurrentSituation] = useState('beforeStart');
+    const functionWithSwitch = (parameter) => {
+            switch(parameter){
+              case "beforeStart":
+                return <StartQuestions currentSituation={currentSituation} setCurrentSituation={setCurrentSituation}/>
+              case "Start":
+                return <Questions props={props} showResult={showResult} setShowResult={setShowResult} correctAns={correctAns}  wrongAns={wrongAns} setCorrectAns={setCorrectAns} setWrongAns={setWrongAns} currentSituation={currentSituation} setCurrentSituation={setCurrentSituation}/>
+              case "Result":
+                return <ShowResult showResult={showResult} setShowResult={setShowResult} correctAns={correctAns} wrongAns={wrongAns} setWrongAns={setWrongAns} currentSituation={currentSituation} setCurrentSituation={setCurrentSituation}/>
+              default:
+                return <StartQuestions />
+            }
+          }
   const [showResult,setShowResult] = useState(false);
   const [correctAns,setCorrectAns] = useState([]);
   const [wrongAns,setWrongAns] = useState([]);
 
 
-    if (showResult==true) {
-        console.log(correctAns);
-        console.log(wrongAns);
-    }
+
 
     return (
     <div>
@@ -43,9 +52,10 @@ const Quiz = (props) => {
             }>
 
 
-        <Questions props={props} showResult={showResult} setShowResult={setShowResult} correctAns={correctAns}  wrongAns={wrongAns} setCorrectAns={setCorrectAns} setWrongAns={setWrongAns}/>
+        {functionWithSwitch(currentSituation)}
 
-        <ShowResult showResult={showResult} setShowResult={setShowResult} correctAns={correctAns} wrongAns={wrongAns} setWrongAns={setWrongAns}/>
+
+
 
 
 
@@ -55,6 +65,7 @@ const Quiz = (props) => {
     </div>
 
         )
+
 }
 
 export default Quiz;
