@@ -5,11 +5,7 @@ import { ShowResult }  from '@/Components/showResult';
 import { StartQuestions }  from '@/Components/startQuestions';
 import Authenticated from "@/Layouts/AuthenticatedLayout"
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 
 
 const bull = (
@@ -44,7 +40,7 @@ const Quiz = (props) => {
 
 
     return (
-    <div>
+    <div  className=" bg-[#ff4500]">
         <Authenticated auth={props.auth} header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Index

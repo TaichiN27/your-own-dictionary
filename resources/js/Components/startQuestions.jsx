@@ -12,7 +12,7 @@ export const StartQuestions = ({currentSituation, setCurrentSituation}) => {
     }
 
     return (
-        <Box sx={{ '& button': { m: 1 } }}>
+        <Box sx={{ '& button': { m: 1 } }} className="bg-[#ff4500]" >
 
           <div>
             <Button variant="contained" size="large" onClick={start}>

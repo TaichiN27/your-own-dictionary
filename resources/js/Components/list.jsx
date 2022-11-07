@@ -30,9 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
+
 
 
 
@@ -41,12 +39,12 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 export const List = ({ vocabularies }) => {
-    
+
     console.log(vocabularies.data)
     let ctn = 0
     let current = 0
 
-    
+
     return (
         <TableContainer component={Paper} className="mt-5 mb-5">
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -59,36 +57,36 @@ export const List = ({ vocabularies }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-        
+
           {vocabularies.data.map((vocabulary) => {
             function ctnNum() {
                 if(current!=vocabulary.id) {
                         current=vocabulary.id
                         ctn = ctn + 1
-                                         
+
                     }
                     return ctn
              }
-             
+
                 let time = vocabulary.created_at.split("T");
                 let legitTime = time[0].replace('-','/')
-                                             
+
                 while(legitTime !== time[0]) {
-                                                 
+
                     time[0] = time[0].replace('-','/');
                     legitTime = legitTime.replace('-','/');
-                                                 
-                     }  
-                                    
+
+                     }
+
         let date = time[1].split(".");
         let legitDate = date[0]
-        
+
             function jumpToLink() {
                 console.log(vocabulary.id)
                 window.location.replace("/vocabularies/" + vocabulary.id)
             }
-                                 
-              return(         
+
+              return(
               <StyledTableRow hover onClick={jumpToLink}>
               <StyledTableCell component="th" scope="row">
                 {ctnNum()}
@@ -98,8 +96,8 @@ export const List = ({ vocabularies }) => {
               <StyledTableCell align="right" className="cursor-pointer">{legitTime}</StyledTableCell>
             </StyledTableRow>
             )
-              
-          
+
+
           })}
         </TableBody>
       </Table>
@@ -121,21 +119,21 @@ export const List = ({ vocabularies }) => {
     const tableBorder = {
         borderCollapse: "collapse",
 
-        border: "2px solid green" 
+        border: "2px solid green"
     }
     const insideTable = {
-        border: "1px solid green" 
+        border: "1px solid green"
     }
     const boxColor = {
         backgroundColor: "#ccffcc",
-        padding: "0.3em" 
+        padding: "0.3em"
     }
     const hover = { BackgroundColor: "#fcfcaa" }
 
 
     const links = {
         display: "block",
-        padding: "0.6em 1em" 
+        padding: "0.6em 1em"
     }
     //let d = new Date(Date.parse(list.created));
 
@@ -160,34 +158,34 @@ export const List = ({ vocabularies }) => {
                 </thead>
                     <tbody>
                         {vocabularies.data.map((vocabulary) =>{
-                        
-                            
-                        
+
+
+
                                  function ctnNum() {
                                      if(current!=vocabulary.id) {
                                          current=vocabulary.id
                                          ctn = ctn + 1
-                                         
+
                                      }
                                     return ctn
                                  }
-                                 
+
                                  let time = vocabulary.created_at.split("T");
                                  let legitTime = time[0].replace('-','/')
-                                 
+
                                     while(legitTime !== time[0]) {
-                                     
+
                                         time[0] = time[0].replace('-','/');
                                         legitTime = legitTime.replace('-','/');
-                                     
-                                    }  
-                                    
+
+                                    }
+
                                 let date = time[1].split(".");
                                 let legitDate = date[0]
-                                 
-                             
-                                 
-                        
+
+
+
+
                                 return(
                                 <tr key={vocabulary.id}>
                                  <th scope="row" style={insideTable,boxColor}>{ctnNum()}</th>
@@ -196,11 +194,11 @@ export const List = ({ vocabularies }) => {
                                     <td className="hover:bg-slate-200" style={insideTable}><Link href={`/vocabularies/${vocabulary.id}`} style={hover, links}>{legitTime}</Link></td>
                                 </tr>)
                             })}
-                            
-                            
+
+
                     </tbody>
             </table>
-            
+
         </div>
     )
 }*/

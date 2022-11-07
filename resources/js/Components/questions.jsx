@@ -56,8 +56,6 @@ export const Questions = (props) => {
 
   let randomArray = arrayShuffle(numArray)
 
-  console.log(data);
-  console.log(data.length);
 
   const handleAnswerButtonClick = (e) => {
     if (e.target.value == data[currentQuestion].japanese) {
@@ -75,7 +73,7 @@ export const Questions = (props) => {
     }
     const nextQuestion = currentQuestion + 3;
 
-    if(nextQuestion<data.length){
+    if(nextQuestion<data.length-2){
       setCurrentQuestion(nextQuestion);
     } else {
         //alert("FINISH");
@@ -89,7 +87,9 @@ export const Questions = (props) => {
 
   function moveToResult() {
     setCurrentSituation("Result")
-}
+    }
+
+
 
     return (
     <div>
@@ -106,9 +106,9 @@ export const Questions = (props) => {
                   {data[currentQuestion].english}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary"  spacing={2} direction="row">
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+randomArray[0]].japanese}>{data[currentQuestion+randomArray[0]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[1]].japanese}>{data[currentQuestion+randomArray[1]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"20px" }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[2]].japanese}>{data[currentQuestion+randomArray[2]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+randomArray[0]].japanese}>{data[currentQuestion+randomArray[0]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[1]].japanese}>{data[currentQuestion+randomArray[1]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[2]].japanese}>{data[currentQuestion+randomArray[2]].japanese}</Button>
                 </Typography>
           </CardContent>
           <CardActions>

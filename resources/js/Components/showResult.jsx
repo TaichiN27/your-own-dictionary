@@ -15,10 +15,13 @@ export const ShowResult = (props) => {
     let setCorrectAns = props.setCorrectAns;
     let setWrongAns = props.setWrongAns;
 
-   return(
-    <div className="container mx-auto">
 
-    <h1>Your Result</h1>
+   return(
+    <div className="container mx-auto bg-[#ff4500] pb-8">
+
+        <div className="text-center">
+        <h1 className="text-white display-4">Result</h1>
+        </div>
 
     {wrongAns.length!==0 ?
     <TableContainer component={Paper} sx={{ marginTop: "100px"}}>
@@ -29,20 +32,27 @@ export const ShowResult = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {wrongAns.map((ans) => (
+          {wrongAns.map((ans) => {
+            function jumpToLink() {
+                console.log(ans.id)
+                window.location.replace("/vocabularies/" + ans.id)
+            }
+
+          return(
             <TableRow
-              key={ans.english}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer'  }}
+              hover
+              onClick={jumpToLink}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" >
                 {ans.english}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" >
                 {ans.japanese}
               </TableCell>
-              <TableCell align="right">The count mistakes</TableCell>
+              <TableCell align="right" >The count mistakes</TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
       </Table>
     </TableContainer>
@@ -53,7 +63,7 @@ export const ShowResult = (props) => {
 
 
     {correctAns.length!==0 ?
-    <TableContainer component={Paper} sx={{ marginTop: "100px", marginBottom: "100px"}}>
+    <TableContainer component={Paper} sx={{ marginTop: "100px"}}>
       <Table sx={{ minWidth: 650,}} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -61,21 +71,27 @@ export const ShowResult = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {correctAns.map((ans) => (
+          {correctAns.map((ans) => {
+            function jumpToLink() {
+                console.log(ans.id)
+                window.location.replace("/vocabularies/" + ans.id)
+            }
+            return(
             <TableRow
               key={ans.english}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer'}}
+              hover
+              onClick={jumpToLink}
             >
               <TableCell component="th" scope="row">
                 {ans.english}
               </TableCell>
-              <TableCell align="right">he count mistakes</TableCell>
               <TableCell component="th" scope="row">
                 {ans.japanese}
               </TableCell>
               <TableCell align="right">The count mistakes</TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
       </Table>
     </TableContainer>
