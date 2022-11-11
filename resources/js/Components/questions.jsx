@@ -32,14 +32,15 @@ export const Questions = (props) => {
     let setWrongAns = props.setWrongAns;
     let currentSituation = props.currentSituation;
     let setCurrentSituation = props.setCurrentSituation
-
+    const [showBotton,setShowBotton] = useState(false);
+    console.log(showBotton);
 
 
 
 
     const [currentQuestion,setCurrentQuestion] = useState(0);
     console.log(data.length);
-    console.log(data.length-currentQuestion);
+    console.log(currentQuestion);
   function arrayShuffle(array) {
     for(var i = (array.length - 1); 0 < i; i--){
 
@@ -55,39 +56,64 @@ export const Questions = (props) => {
   }
 
   let randomArray = arrayShuffle(numArray)
+  const nextQuestion = currentQuestion + 3;
 
 
   const handleAnswerButtonClick = (e) => {
-    if (e.target.value == data[currentQuestion].japanese) {
-        console.log(data[currentQuestion]);
-        setCorrectAns([...correctAns, data[currentQuestion]])
-        console.log(correctAns);
-        const music = new Audio('/audios/Quiz-Buzzer02-1.mp3');
-        music.play();
-        console.log(true);
-    } else {
-        console.log(false);
-        setWrongAns([...wrongAns, data[currentQuestion]])
-        const music = new Audio('/audios/Quiz-Wrong_Buzzer02-1.mp3');
-        music.play();
-    }
-    const nextQuestion = currentQuestion + 3;
+    console.log(correctAns);
 
-    if(nextQuestion<data.length-2){
-      setCurrentQuestion(nextQuestion);
-    } else {
-        //alert("FINISH");
-        setCurrentSituation("Result");
-        console.log(currentSituation)
+
+
+            if (e.target.value == data[currentQuestion].japanese) {
+                console.log(data[currentQuestion]);
+                setCorrectAns([...correctAns, data[currentQuestion]])
+                let aANs = []
+
+                aANs.push(data[currentQuestion])
+                console.log(aANs);
+                const music = new Audio('/audios/Quiz-Buzzer02-1.mp3');
+                music.play();
+                console.log(true);
+            } else {
+                console.log(false);
+                setWrongAns([...wrongAns, data[currentQuestion]])
+                const music = new Audio('/audios/Quiz-Wrong_Buzzer02-1.mp3');
+                music.play();
+            }
+            console.log(correctAns);
+            console.log(wrongAns);
+
+
+            if(nextQuestion<data.length-3){
+                console.log(correctAns);
+                setCurrentQuestion(nextQuestion);
+            } else {
+                console.log(setCorrectAns);
+
 
     }
+
 
 
   }
 
   function moveToResult() {
-    setCurrentSituation("Result")
+    setCurrentSituation("beforeStart")
     }
+
+    function show() {
+        console.log(correctAns);
+                Inertia.visit('/quiz', {
+                    method: 'post',
+                    data: {
+                    correctAns:correctAns,
+                    wrongAns:wrongAns,
+                    },
+                });
+                window.location.replace("/quiz/result")
+
+    }
+
 
 
 
@@ -95,7 +121,7 @@ export const Questions = (props) => {
     <div>
 
 
-
+        {nextQuestion<data.length-3 ?
         <div className="w-4/5 mt-8 text-center mx-auto">
         <Card sx={{ minWidth: 275 }}>
           <CardContent>
@@ -106,9 +132,9 @@ export const Questions = (props) => {
                   {data[currentQuestion].english}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary"  spacing={2} direction="row">
-                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+randomArray[0]].japanese}>{data[currentQuestion+randomArray[0]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[1]].japanese}>{data[currentQuestion+randomArray[1]].japanese}</Button>
-                  <Button variant="contained"  sx={{ "margin":"50px", "width":"150px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[2]].japanese}>{data[currentQuestion+randomArray[2]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"70px", "width":"180px", "height":"50px" }} onClick={handleAnswerButtonClick} value={data[currentQuestion+randomArray[0]].japanese}>{data[currentQuestion+randomArray[0]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"70px", "width":"180px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[1]].japanese}>{data[currentQuestion+randomArray[1]].japanese}</Button>
+                  <Button variant="contained"  sx={{ "margin":"70px", "width":"180px", "height":"50px"  }} onClick={(e)=>handleAnswerButtonClick(e)} value={data[currentQuestion+randomArray[2]].japanese}>{data[currentQuestion+randomArray[2]].japanese}</Button>
                 </Typography>
           </CardContent>
           <CardActions>
@@ -116,6 +142,10 @@ export const Questions = (props) => {
           </CardActions>
         </Card>
         </div>
+        :
+        <Button variant="contained"  sx={{ "margin":"70px", "width":"180px", "height":"50px" }} onClick={show}>result</Button>
+        }
+
 
 
 

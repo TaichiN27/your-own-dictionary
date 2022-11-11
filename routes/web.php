@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\VocabularyController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +23,13 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get("/", [VocabularyController::class, "index"])->name('index');
     Route::get("/vocabularies/{vocabulary}", [VocabularyController::class, "show"]);
     Route::delete("/vocabularies/{vocabulary}", [VocabularyController::class, "delete"]);
-    Route::get("/quiz", [VocabularyController::class, "quiz"])->name('quiz');
+    Route::get("/quiz/result", [QuestionController::class, "result"])->name('result');
+    Route::get("/quiz", [QuestionController::class, "quiz"])->name('quiz');
+    Route::post("/quiz", [QuestionController::class, "store"])->name('store');
+
 });
+
+
 
 
 /*Route::get('/dashboard', function () {

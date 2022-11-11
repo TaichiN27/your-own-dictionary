@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 
-export const StartQuestions = ({currentSituation, setCurrentSituation}) => {
+export const StartQuestions = ({currentSituation, setCurrentSituation, correctAns}) => {
 
+    console.log(correctAns);
     function start() {
         const music = new Audio('/audios/Quiz-Question01-1.mp3');
         music.play();
@@ -15,9 +16,14 @@ export const StartQuestions = ({currentSituation, setCurrentSituation}) => {
         <Box sx={{ '& button': { m: 1 } }} className="bg-[#ff4500]" >
 
           <div>
-            <Button variant="contained" size="large" onClick={start}>
-              Start
-            </Button>
+            <div className="container text-center">
+            <div className="text-center">
+                <h1 className="text-white display-4">Let's challenge the quiz!!</h1>
+            </div>
+                <Button variant="contained" size="large" onClick={start}>
+                Start
+                </Button>
+            </div>
           </div>
         </Box>
       );
