@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import Nationality from '@/Components/Nationality';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 
 export default function Register() {
@@ -12,7 +13,15 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        nationality: '',
+
     });
+
+
+
+
+
+    console.log(data);
 
     useEffect(() => {
         return () => {
@@ -26,7 +35,7 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
+        console.log(data);
         post(route('register'));
     };
 
@@ -95,6 +104,12 @@ export default function Register() {
                         handleChange={onHandleChange}
                         required
                     />
+
+                    <InputError message={errors.password_confirmation} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <Nationality  data={data} onHandleChange={onHandleChange}/>
 
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>

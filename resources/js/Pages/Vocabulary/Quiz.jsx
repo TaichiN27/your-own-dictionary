@@ -1,13 +1,10 @@
 import React, {useState} from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { Questions }  from '@/Components/questions';
+import { StartQuestions }  from '@/Components/startQuestions';
 import Authenticated from "@/Layouts/AuthenticatedLayout"
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 
 
 const bull = (
@@ -21,60 +18,26 @@ const bull = (
 
 
 const Quiz = (props) => {
+    const [currentSituation,setCurrentSituation] = useState('beforeStart');
+    const functionWithSwitch = (parameter) => {
+            switch(parameter){
+              case "beforeStart":
+                return <StartQuestions currentSituation={currentSituation} setCurrentSituation={setCurrentSituation}  correctAns={correctAns} />
+              case "Start":
+                return <Questions props={props} showResult={showResult} setShowResult={setShowResult} correctAns={correctAns}  wrongAns={wrongAns} setCorrectAns={setCorrectAns} setWrongAns={setWrongAns} currentSituation={currentSituation} setCurrentSituation={setCurrentSituation}/>
+              default:
+                return <StartQuestions />
+            }
+          }
+  const [showResult,setShowResult] = useState(false);
+  const [correctAns,setCorrectAns] = useState([]);
+  const [wrongAns,setWrongAns] = useState([]);
 
 
 
-
- function arrayShuffle(array) {
-  for(var i = (array.length - 1); 0 < i; i--){
-
-    // 0〜(i+1)の範囲で値を取得
-    var r = Math.floor(Math.random() * (i + 1));
-
-    // 要素の並び替えを実行
-    var tmp = array[i];
-    array[i] = array[r];
-    array[r] = tmp;
-  }
-  return array;
-  }
-
-  const questions =
-  props.datas.map(data =>
-  [
-    {
-      questionText:data.english,
-      answerOptions:arrayShuffle([
-        {answerText:data.japanese,isCorrect:true},
-        {answerText:'ベクトル',isCorrect:false},
-        {answerText:'2次曲線',isCorrect:false},
-      ]),
-    }]
-
-
-
-
-  );
-
-
-
-
-
-
-
-  const [currentQuestion,setCurrentQuestion] = useState(0);
-
-  const handleAnswerButtonClick = () => {
-
-    const nextQuestion = currentQuestion + 1;
-
-    if(nextQuestion < 10){
-      setCurrentQuestion(nextQuestion);
-    }
-  }
 
     return (
-    <div>
+    <div  className=" bg-[#ff4500]">
         <Authenticated auth={props.auth} header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Index
@@ -82,7 +45,10 @@ const Quiz = (props) => {
             }>
 
 
-        <Questions props={props} />
+        {functionWithSwitch(currentSituation)}
+
+
+
 
 
 
@@ -92,6 +58,7 @@ const Quiz = (props) => {
     </div>
 
         )
+
 }
 
 export default Quiz;

@@ -69,12 +69,10 @@ class VocabularyController extends Controller
                 $input+=$pronunciations;
                 $input+=$lexicalCategory;
 
-                //dd($ans["results"][0]["lexicalEntries"][0]["lexicalCategory"]);
 
 
 
                 $vocabulary->fill($input)->save();
-                //dd($vocabulary['id']);
                 return redirect("/vocabularies/".$vocabulary['id']);
                 } else {
                     return redirect('/')->with('message', 'This word was not found in the dictionary.');
@@ -82,8 +80,6 @@ class VocabularyController extends Controller
 
 
             } else {
-                //dd("already");
-
                 return redirect("/vocabularies/".$data['id'])->with('message', 'Already registered.');
             }
 
@@ -96,7 +92,6 @@ class VocabularyController extends Controller
 
         public function show(Vocabulary $vocabulary)
         {
-            //dd(json_decode($vocabulary["pronunciations"]));
             return Inertia::render("Vocabulary/Show",["vocabulary" => $vocabulary]);
 
         }
@@ -106,26 +101,8 @@ class VocabularyController extends Controller
             return redirect("/");
         }
 
-        public function quiz(Vocabulary $vocabulary){
-
-            $id = Auth::id();
-            $data = Vocabulary::where('user_id', $id)->inRandomOrder()->take(10)->get();
-            //$vocabulary += $data;
-            $data=json_decode($data);
-
-
-            $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
-
-            //dd($data);
-            $fakeAns = Vocabulary::inRandomOrder()->take(10)->get();
-            $fakeAns = json_decode($fakeAns);
 
 
 
-
-
-
-            return Inertia::render("Vocabulary/Quiz",["datas" => $data, "fakeAns" => $fakeAns]);
-        }
-
+       
 }
