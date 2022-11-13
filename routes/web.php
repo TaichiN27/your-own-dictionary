@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get("/quiz/result", [QuestionController::class, "result"])->name('result');
     Route::get("/quiz", [QuestionController::class, "quiz"])->name('quiz');
     Route::post("/quiz", [QuestionController::class, "store"])->name('store');
+    Route::get("/quiz/result/{vocabulary}", [QuestionController::class, "detail"]);
 
 });
 
