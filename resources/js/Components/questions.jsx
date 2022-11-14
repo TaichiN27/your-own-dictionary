@@ -74,7 +74,7 @@ export const Questions = (props) => {
 
 
 
-        if (nextQuestion < data.length - 2 && nextQuestion < 28) {
+        if (currentQuestion < data.length - 2 && currentQuestion <30) {
             setCurrentQuestion(nextQuestion);
 
 
@@ -111,7 +111,7 @@ export const Questions = (props) => {
 
 
 
-            {nextQuestion < data.length - 2 && nextQuestion < 28 ?
+            {currentQuestion < data.length - 2 && currentQuestion < 30 ?
                 <div className="w-4/5 mt-8 text-center mx-auto">
                     <Card sx={{ minWidth: 275 }}>
                         <CardContent>
