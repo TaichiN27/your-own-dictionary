@@ -86,7 +86,8 @@ class QuestionController extends Controller
     {
         $id = Auth::id();
         $ansTime = Question::where('user_id', $id)->latest('updated_at')->first(['updated_at']);
-        $ansTime = json_decode($ansTime);
+        //dd($ansTime);
+        /*$ansTime = json_decode($ansTime);
         $ansTime = $ansTime->updated_at;
         $split = explode("T", $ansTime ,2);
         $date = $split[0];
@@ -100,10 +101,10 @@ class QuestionController extends Controller
 
 
         $ansTime = $date. " ". $time;
-        //dd($ansTime);
+        //dd($ansTime);*/
 
 
-        $ans = Question::where([['user_id', $id],['updated_at', $ansTime]])->get();
+        $ans = Question::where([['user_id', $id],['updated_at', $ansTime->updated_at]])->get();
 
         //dd($ans);
 
