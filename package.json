@@ -2,8 +2,9 @@
     "private": true,
     "scripts": {
         "dev": "vite",
+        "watch": "vite build --watch",
         "build": "vite build",
-        "watch": "vite build --watch"
+        "heroku-postbuild": "npm run build"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
