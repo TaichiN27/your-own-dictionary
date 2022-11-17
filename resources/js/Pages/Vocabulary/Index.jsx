@@ -33,29 +33,31 @@ const Index = (props) => {
 
 
     return (
-        <Authenticated auth={props.auth} header={
-            <h2 className="font-semibold text-xl text-gray-800 leading-tight ">
-                Index
-            </h2>
-        }>
+        <div className="App bg-[#ff4500]">
+            <Authenticated auth={props.auth} header={
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight ">
+                    Index
+                </h2>
+            }>
 
-            <div className="App bg-[#ff4500]">
-                <Title />
-                <div className="container my-5 fw-bold">
-                    <p className="fw-bold text-center text-lg text-white">I often read books written in English and try to expand my knowledge of the book's content as well as understand the meanings of new words I encounter and how to improve my English. When I first started, I used to write down words on a piece of paper, but I always lost that paper somewhere. How useless, I thought. So next I used the note-taking function on my smartphone, but it was unorganized and difficult to use. So I created this site, which has the ability to write down unfamiliar words in a more organized environment.</p>
-                </div>
-                <div className="container bg-[#ff4500] mt-5">
-                    <div className="alert alert-primary pb-0">
-                        {flash.message && (alerting())}
-                        <Form auth={props.auth} />
-                        <List vocabularies={vocabularies} />
+                <div>
+                    <Title />
+                    <div className="container my-5 fw-bold">
+                        <p className="fw-bold text-center text-lg text-white">I often read books written in English and try to expand my knowledge of the book's content as well as understand the meanings of new words I encounter and how to improve my English. When I first started, I used to write down words on a piece of paper, but I always lost that paper somewhere. How useless, I thought. So next I used the note-taking function on my smartphone, but it was unorganized and difficult to use. So I created this site, which has the ability to write down unfamiliar words in a more organized environment.</p>
+                    </div>
+                    <div className="container mt-5">
+                        <div className="alert alert-primary pb-0">
+                            {flash.message && (alerting())}
+                            <Form auth={props.auth} />
+                            <List vocabularies={vocabularies} />
+                        </div>
+                    </div>
+                    <div className='paginate text-center pb-3'>
+                        {paginationLinks}
                     </div>
                 </div>
-                <div className='paginate text-center mb-3'>
-                    {paginationLinks}
-                </div>
-            </div>
-        </Authenticated>
+            </Authenticated>
+        </div>
     );
 }
 
