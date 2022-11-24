@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 
 export const StartQuestions = ({data, currentSituation, setCurrentSituation, correctAns }) => {
     let notstart = false
+    console.log(data.length);
     if (data.length<3) {
         notstart = true
     } else {
