@@ -34,6 +34,7 @@ export const Questions = (props) => {
     let setCurrentSituation = props.setCurrentSituation
     const [showBotton, setShowBotton] = useState(false);
     let num = Math.floor(data.length)-3;
+    const [next, setNext] = useState(true);
 
 
 
@@ -55,7 +56,8 @@ export const Questions = (props) => {
 
     let randomArray = arrayShuffle(numArray)
     const nextQuestion = currentQuestion + 3;
-    let next = true;
+
+
 
 
     const handleAnswerButtonClick = (e) => {
@@ -74,10 +76,14 @@ export const Questions = (props) => {
 
 
 
-        if (currentQuestion < data.length - 2 && currentQuestion <30) {
+        if (currentQuestion < data.length-3 && currentQuestion <27) {
             setCurrentQuestion(nextQuestion);
+            setNext(true);
 
 
+
+        } else {
+            setNext(false);
         }
 
 
@@ -111,7 +117,7 @@ export const Questions = (props) => {
 
 
 
-            {currentQuestion < data.length - 2 && currentQuestion < 30 ?
+            {next ?
                 <div className="w-4/5 mt-8 text-center mx-auto">
                     <Card sx={{ minWidth: 275 }}>
                         <CardContent>

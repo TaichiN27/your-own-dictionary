@@ -22,7 +22,7 @@ const Quiz = (props) => {
     const functionWithSwitch = (parameter) => {
         switch (parameter) {
             case "beforeStart":
-                return <StartQuestions currentSituation={currentSituation} setCurrentSituation={setCurrentSituation} correctAns={correctAns} />
+                return <StartQuestions data={props.data} currentSituation={currentSituation} setCurrentSituation={setCurrentSituation} correctAns={correctAns} />
             case "Start":
                 return <Questions props={props} showResult={showResult} setShowResult={setShowResult} correctAns={correctAns} wrongAns={wrongAns} setCorrectAns={setCorrectAns} setWrongAns={setWrongAns} currentSituation={currentSituation} setCurrentSituation={setCurrentSituation} />
             default:
