@@ -75,11 +75,12 @@ export const Questions = (props) => {
         }
 
 
+        console.log(currentQuestion);
 
-        if (currentQuestion < data.length-3 && currentQuestion <27) {
+        if (currentQuestion < data.length-4 && currentQuestion <27) {
             setCurrentQuestion(nextQuestion);
             setNext(true);
-
+            console.log(currentQuestion);
 
 
         } else {
