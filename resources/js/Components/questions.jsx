@@ -40,6 +40,7 @@ export const Questions = (props) => {
 
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    console.log(data.length);
     function arrayShuffle(array) {
         for (var i = (array.length - 1); 0 < i; i--) {
 
@@ -77,7 +78,7 @@ export const Questions = (props) => {
 
 
 
-        if (currentQuestion < data.length-4 && currentQuestion <27) {
+        if (currentQuestion < data.length-5) {
             setCurrentQuestion(nextQuestion);
             setNext(true);
 
@@ -97,7 +98,6 @@ export const Questions = (props) => {
     }
 
     function show() {
-        console.log("ok");
         Inertia.visit('/quiz', {
             method: 'post',
             data: {

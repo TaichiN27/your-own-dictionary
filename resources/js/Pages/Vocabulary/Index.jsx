@@ -10,7 +10,6 @@ import { usePage } from '@inertiajs/inertia-react';
 const Index = (props) => {
     const { vocabularies } = props;
 
-    console.log(props.auth)
 
     const { flash } = usePage().props
 
