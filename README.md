@@ -1,9 +1,7 @@
 
-# Name（リポジトリ/プロジェクト/OSSなどの名前）
+# Name
 
 Make your own dictionary
-
-"hoge"が何かを簡潔に紹介する
 
 # DEMO
 
