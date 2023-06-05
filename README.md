@@ -38,7 +38,6 @@ react-pageflip@2.0.3
 
 # Author
 
-作成情報を列挙する
 
 * Taichi Nakamura
 * Doshisha Uni
